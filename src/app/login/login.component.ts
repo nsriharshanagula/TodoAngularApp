@@ -8,25 +8,25 @@ import { HardcodedAuthenticationService } from '../service/hardcoded-authenticat
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   username = 'admin';
   password = '';
   errorMessage = 'Invalid Credentials';
   invalidLogin = false;
 
   constructor(private router: Router, 
-    private: HardcodedAuthenticationService: HardcodedAuthenticationService) { }
+    private hardcodedAuthenticationServicevice: HardcodedAuthenticationService) { }
 
   ngOnInit() {
   }
 
   handleLogin(){
     console.log(this.password);
-    if(this.username==='admin' && this.password === 'dummy'){
+    //if(this.username==='admin' && this.password === 'dummy')
+    if(this.hardcodedAuthenticationServicevice.authenticate(this.username, this.password)){
+      this.router.navigate(['welcome', this.username])
       this.invalidLogin = false
     }
     else{
-      this.router.navigate(['welcome', this.username])
       this.invalidLogin = true;
     }
   }
